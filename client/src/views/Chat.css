@@ -1,0 +1,384 @@
+:root {
+  --bg-color-light: rgba(240, 242, 245, 0.6); /* Lighter, more transparent */
+  --bg-color-messages-light: rgba(233, 236, 239, 0.6);
+  --bg-color-message-light: rgba(255, 255, 255, 0.7);
+  --bg-color-input-light: rgba(255, 255, 255, 0.7);
+  --bg-color-userlist-light: rgba(248, 249, 250, 0.6);
+  --text-color-light: #343a40;
+  --border-color-light: rgba(222, 226, 230, 0.4);
+  --input-border-light: rgba(206, 210, 218, 0.5);
+  --scroll-thumb-light: rgba(173, 181, 189, 0.7);
+  --scroll-track-light: rgba(233, 236, 239, 0.4);
+  --shadow-color-light: rgba(0, 0, 0, 0.15);
+  --message-shadow-light: rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode {
+  --bg-color-light: rgba(44, 44, 44, 0.6);
+  --bg-color-messages-light: rgba(58, 58, 58, 0.6);
+  --bg-color-message-light: rgba(74, 74, 74, 0.7);
+  --bg-color-input-light: rgba(58, 58, 58, 0.7);
+  --bg-color-userlist-light: rgba(51, 51, 51, 0.6);
+  --text-color-light: #e0e0e0;
+  --border-color-light: rgba(68, 68, 68, 0.4);
+  --input-border-light: rgba(85, 85, 85, 0.5);
+  --scroll-thumb-light: rgba(102, 102, 102, 0.7);
+  --scroll-track-light: rgba(58, 58, 58, 0.4);
+  --shadow-color-light: rgba(0, 0, 0, 0.4);
+  --message-shadow-light: rgba(0, 0, 0, 0.3);
+}
+
+.chat-page-container {
+  display: flex;
+  height: 100vh;
+  max-width: 1000px; /* Increased max-width to accommodate user list */
+  margin: 0 auto;
+  box-shadow: 0 8px 32px 0 var(--shadow-color-light); /* Stronger shadow for glass effect */
+  backdrop-filter: blur(10px); /* Glass effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border-radius: 12px;
+  border: 1px solid var(--border-color-light); /* Subtle border */
+  overflow: hidden;
+  background-color: var(--bg-color-light);
+  color: var(--text-color-light);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chat-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent; /* Background handled by container */
+}
+
+.chat-header {
+  padding: 10px 15px;
+  background-color: var(--bg-color-input-light);
+  border-bottom: 1px solid var(--border-color-light);
+  display: flex;
+  justify-content: space-between; /* Align items to start and end */
+  align-items: center; /* Vertically center items */
+  backdrop-filter: blur(5px); /* Glass effect for header */
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.user-nickname-label {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: var(--text-color-light);
+  padding: 5px 10px;
+  border-radius: 8px;
+  background-color: rgba(0, 123, 255, 0.1); /* Subtle background for the label */
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  margin-right: auto; /* Push to the left */
+}
+
+.dark-mode-toggle {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.dark-mode-toggle:hover {
+  background-color: #0056b3;
+}
+
+.messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: var(--bg-color-messages-light);
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(5px); /* Glass effect for messages */
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* Custom Scrollbar */
+.messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages::-webkit-scrollbar-track {
+  background: var(--scroll-track-light);
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb-light);
+  border-radius: 10px;
+}
+
+.messages::-webkit-scrollbar-thumb:hover {
+  background: #6c757d;
+}
+
+.message {
+  background-color: var(--bg-color-message-light);
+  padding: 10px 15px;
+  border-radius: 18px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  max-width: 80%;
+  align-self: flex-start;
+  box-shadow: 0 2px 10px var(--message-shadow-light); /* Stronger shadow */
+  border: 1px solid rgba(255, 255, 255, 0.18); /* Subtle border */
+}
+
+.my-message {
+  align-self: flex-end;
+  background-color: rgba(0, 123, 255, 0.7); /* A distinct color for my messages */
+  color: white;
+}
+
+.dark-mode .my-message {
+  background-color: rgba(0, 123, 255, 0.5); /* Darker distinct color for my messages in dark mode */
+}
+
+
+.message-sender {
+  font-weight: bold;
+  margin-right: 5px;
+  color: #007bff;
+}
+
+.dark-mode .message-sender {
+  color: #8ab4f8; /* Lighter blue for dark mode */
+}
+
+.message.my-message {
+  align-self: flex-end;
+  background-color: rgba(0, 123, 255, 0.7); /* A distinct color for my messages */
+  color: white;
+}
+
+.dark-mode .message.my-message {
+  background-color: rgba(0, 123, 255, 0.5); /* Darker distinct color for my messages in dark mode */
+}
+
+.chat-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.chat-file-link {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(233, 236, 239, 0.7); /* More transparent */
+  padding: 8px 12px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.18); /* Subtle border */
+}
+
+.dark-mode .chat-file-link {
+  background-color: rgba(85, 85, 85, 0.7);
+  color: #8ab4f8;
+}
+
+.chat-file-link:hover {
+  background-color: rgba(222, 226, 230, 0.7);
+}
+
+.dark-mode .chat-file-link:hover {
+  background-color: rgba(102, 102, 102, 0.7);
+}
+
+.file-icon {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+
+.input-area {
+  display: flex;
+  padding: 15px;
+  border-top: 1px solid var(--border-color-light);
+  background-color: var(--bg-color-input-light);
+  gap: 10px;
+  align-items: center;
+  position: relative; /* For emoji picker positioning */
+  backdrop-filter: blur(5px); /* Glass effect for input area */
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.input-area input {
+  flex-grow: 1;
+  padding: 12px 15px;
+  border: 1px solid var(--input-border-light);
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.5); /* More transparent input */
+  color: #1d1d1f;
+}
+
+.input-area input:focus {
+  border-color: #007bff;
+  background-color: rgba(255, 255, 255, 0.7); /* Less transparent on focus */
+}
+
+.input-area button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.input-area button:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.input-area button:active {
+  transform: translateY(0);
+}
+
+.attach-button {
+  font-size: 8px; /* Adjusted font size for text */
+  padding: 8px 12px; /* Adjusted padding for text */
+  background-color: #007bff; /* Added background for consistency */
+  color: white;
+  border-radius: 20px; /* Rounded corners */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.attach-button:hover {
+  background-color: #0056b3;
+}
+
+.emoji-picker {
+  position: relative;
+}
+
+.emoji-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 5px;
+  color: var(--text-color-light);
+}
+
+.emoji-list {
+  position: absolute;
+  bottom: 70px; /* Adjusted position */
+  left: 50%; /* Start from the middle */
+  transform: translateX(-50%); /* Pull back by half its width to truly center */
+  width: 220px; /* Fixed width to contain emojis and pagination */
+  background-color: var(--bg-color-input-light);
+  border: 1px solid var(--border-color-light);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column; /* Stack grid and pagination vertically */
+  gap: 10px; /* Space between grid and pagination */
+  box-shadow: 0 2px 10px var(--shadow-color-light);
+  z-index: 10;
+  backdrop-filter: blur(5px); /* Glass effect for emoji list */
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  gap: 5px; /* Space between emojis */
+}
+
+.emoji-grid span {
+  font-size: 20px;
+  padding: 8px; /* Adjusted padding */
+  border-radius: 4px;
+  display: inline-block; /* Use inline-block for centering */
+  text-align: center; /* Center horizontally */
+  line-height: 44px; /* Vertically center based on font-size + padding */
+}
+
+.emoji-grid span:hover {
+  background-color: var(--bg-color-messages-light);
+  cursor: pointer;
+}
+
+.emoji-pagination {
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center;
+  gap: 10px;
+  padding-top: 5px; /* Add some padding to separate from grid */
+}
+
+.emoji-pagination button {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  backdrop-filter: blur(10px); /* 블러 효과 */
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.emoji-pagination button:hover:not(:disabled) {
+  background-color: rgba(0, 123, 255, 0.5); /* Darker on hover */
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.emoji-pagination button:disabled {
+  background-color: rgba(204, 204, 204, 0.2); /* Lighter and more transparent when disabled */
+  border-color: rgba(255, 255, 255, 0.1);
+  cursor: not-allowed;
+}
+
+.emoji-pagination span {
+  font-size: 14px;
+  color: var(--text-color-light);
+}
+
+.user-list-container {
+  width: 200px;
+  background-color: var(--bg-color-userlist-light);
+  border-left: 1px solid var(--border-color-light);
+  padding: 15px;
+  overflow-y: auto;
+  color: var(--text-color-light);
+  backdrop-filter: blur(5px); /* Glass effect for user list */
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.user-list-container h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--text-color-light);
+}
+
+.user-list-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-list-container li {
+  padding: 8px 0;
+  color: var(--text-color-light);
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.user-list-container li:last-child {
+  border-bottom: none;
+}
